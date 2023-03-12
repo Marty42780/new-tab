@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+}
+body {
+  background-color: rgb(17, 25, 39);
+  background-image: url("../assets/bg-image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  overflow: hidden;
+}
+.blur-bg {
+  backdrop-filter: blur(7px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+.content {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  gap: 5em;
+}
+.left-pan {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.time {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  text-align: center;
+  padding: 2em;
+}
+.clock {
+  font-size: 3em;
+}
+.date {
+  margin-top: 10px;
+  font-size: 2em;
+}
+.socials-card {
+  padding: 1.5rem;
+  width: 500px;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+.card-header img {
+  width: 150px;
+}
+.card-header a {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+}
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+}
+.card-body section {
+  padding-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1.5em;
+}
+.card-body section img {
+  height: 50px;
+  border-radius: 50%;
+}
+.card-body section .status {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 50px;
+}
+.card-body section .status > h3 {
+  margin: 0 0 6px 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+.card-body section .status > div {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: #9ca3af;
+}
+.green-dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: rgb(35, 165, 90);
+}
+.right-pan {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.right-pan section {
+  display: flex;
+  gap: 30px;
+}
+.right-pan a {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.3em 1em;
+  font-size: 22px;
+  text-decoration: none;
+}
+.right-pan a:hover {
+  transition: transform 0.2s ease-in-out;
+  transform: scale(108%); 
+}
+.right-pan a img {
+  margin-right: 0.5em;
+  height: 40px;
+}
+
