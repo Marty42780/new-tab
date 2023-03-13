@@ -9,5 +9,8 @@
   },
   "chrome_url_overrides": {
     "newtab": "web/new-tab.html"
-  }
+  },
+  "permissions": [
+    "http://localhost:8080/*"
+  ]
 }
