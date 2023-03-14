@@ -123,10 +123,46 @@ body {
 }
 .right-pan a:hover {
   transition: transform 0.2s ease-in-out;
-  transform: scale(108%); 
+  transform: scale(108%);
 }
 .right-pan a img {
   margin-right: 0.5em;
   height: 40px;
 }
+.notification-pan {
+  position: absolute;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  gap: 1em;
+}
+.notification {
+  font-size: 22px;
+  padding: 10px 15px;
+  border: 1px solid grey;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 10px;
+  transform: translateX(115%);
+}
 
+.notification-info {
+  background-color: rgb(63, 140, 63);
+}
+
+/* @keyframes slideinout {
+  0% {
+    transform: translateX(115%);
+  }
+  25% {
+    transform: translateX(0);
+  }
+  75% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(115%);
+  }
+} */
