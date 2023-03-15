@@ -29,10 +29,13 @@ function displayStorageShortcuts() {
   JSON.parse(localStorage.getItem("shortcuts")).forEach(section => {
     toAddSection = "<section>";
     section.forEach(shortcut => {
-      if (shortcut.target === null) {
-        toAddSection += `<a class="blur-bg" href="` + shortcut.link + `"><img src="` + shortcut.image + `"/><p>` + shortcut.name + `</p></a>`;
+      if (shortcut.target === "window") {
+        let server = localStorage.getItem("server");
+        toAddSection += `<a class="blur-bg" href="` + server + "/mynoise?url=" + encodeURIComponent(shortcut.link) + `"><img src="` + shortcut.image + `"/><p>` + shortcut.name + `</p><span class="material-symbols-outlined"> new_window </span></a>`;
+      } else if (shortcut.target === "_blank") {
+        toAddSection += `<a class="blur-bg" href="` + shortcut.link + `" target="_blank"><img src="` + shortcut.image + `"/><p>` + shortcut.name + `</p><span class="material-symbols-outlined"> open_in_new </span></a>`;
       } else {
-        toAddSection += `<a class="blur-bg" href="` + shortcut.link + `"><img src="` + shortcut.image + `"/><p>` + shortcut.name + `</p><span class="material-symbols-outlined"> open_in_new </span></a>`;
+        toAddSection += `<a class="blur-bg" href="` + shortcut.link + `"><img src="` + shortcut.image + `"/><p>` + shortcut.name + `</p></a>`;
       }
     });
     rightpan.innerHTML += toAddSection + "</section>";
@@ -62,18 +65,15 @@ function updateTime() {
 
 // Notification
 function notify(text, status) {
-  // document.querySelector(".notification-pan").innerHTML += "<div class='notification notification-" + status + "' style='animation-name: slideinout; animation-duration: 5s;'>" + text + "</div>"
-
-  var uniqueID = Date.now();
-  document.querySelector(".notification-pan").innerHTML += "<div class='notification notification-" + status + " notification-" + uniqueID + "' style='animation-name: slideinout-" + uniqueID + "; animation-duration: 5s;'>" + text + "</div>";
-
-  var styleSheet = document.styleSheets[0];
-  var slideinoutKeyframes = "@keyframes slideinout-" + uniqueID + " { 0% { transform: translateX(115%); } 25% { transform: translateX(0); } 75% { transform: translateX(0); } 100% { transform: translateX(115%); } }";
-  styleSheet.insertRule(slideinoutKeyframes, styleSheet.cssRules.length);
-  
+  let notificationElement = document.createElement('div');
+  notificationElement.className = 'notification notification-' + status;
+  notificationElement.textContent = text;
+  notificationElement.style.animation = 'slideinout 5s';
+  document.querySelector('.notification-pan').appendChild(notificationElement);
+  notificationElement.addEventListener('animationend', () => {
+    notificationElement.remove();
+  });
 }
-
-
 
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
@@ -86,13 +86,14 @@ document.addEventListener("DOMContentLoaded", function () {
   if (!localStorage.getItem("apikey")) {
     localStorage.setItem("apikey", prompt("What's your apikey?"));
   };
-  if (!localStorage.getItem("shortcuts")) {
+  localStorageShortcuts = localStorage.getItem("shortcuts");
+  if (!localStorageShortcuts || localStorageShortcuts === "undefined") {
     console.log("[Shortcuts] Test result: the shortcuts aren't in the localstorage");
     fetchAndDisplayShortcuts();
   } else {
     console.log("[Shortcuts] Test result: the shortcuts are already in the localstorage, they will be refetch in 10sec.");
     displayStorageShortcuts();
-    setTimeout(fetchAndDisplayShortcuts, 10000);
+    setTimeout(fetchAndDisplayShortcuts, 5000);
   };
   updateTime();
   setInterval(updateTime, 1000);

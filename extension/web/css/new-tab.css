@@ -142,7 +142,6 @@ body {
 .notification {
   font-size: 22px;
   padding: 10px 15px;
-  border: 1px solid grey;
   border: 1px solid rgba(255, 255, 255, 0.125);
   border-radius: 10px;
   transform: translateX(115%);
@@ -152,7 +151,7 @@ body {
   background-color: rgb(63, 140, 63);
 }
 
-/* @keyframes slideinout {
+@keyframes slideinout {
   0% {
     transform: translateX(115%);
   }
@@ -165,4 +164,4 @@ body {
   100% {
     transform: translateX(115%);
   }
-} */
+}
