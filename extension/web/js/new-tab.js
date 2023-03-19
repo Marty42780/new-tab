@@ -1,8 +1,8 @@
 // Shortcuts
 function fetchAndDisplayShortcuts() {
   let username = localStorage.getItem("username");
-  let apikey = localStorage.getItem("apikey");
   let server = localStorage.getItem("server");
+  let apikey = localStorage.getItem("apikey");
   const getShortcuts = async () => {
     try {
       const response = await fetch(`${server}/shortcuts?username=${username}&apikey=${apikey}`);
@@ -43,6 +43,65 @@ function displayStorageShortcuts() {
   console.log("[Shortcuts] Displayed");
 };
 
+// Discord
+function fetchAndDisplayDiscord() {
+  let server = localStorage.getItem("server");
+  let apikey = localStorage.getItem("apikey");
+  const getDiscord = async () => {
+    try {
+      const response = await fetch(`${server}/discord?apikey=${apikey}`);
+      // console.log("[Discord] Fetched from the server");
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+  getDiscord().then(data => {
+    if (localStorage.getItem("discord") !== JSON.stringify(data)) {
+      localStorage.setItem("discord", JSON.stringify(data));
+      displayStorageDiscord();
+      console.log("[Discord] Discord synchronized with the server");
+    } else {
+      // console.log("[Discord] Fetched with the server but nothing changed");
+    }
+  });
+};
+function displayStorageDiscord() {
+  let discordpan = document.querySelector('.discord-card-body');
+  discordpan.innerHTML = "";
+  JSON.parse(localStorage.getItem("discord"))["members"].forEach(member => {
+    toAddSection = "<section>";
+    if (member["status"] === "online") {
+      toAddSection += `<img src="` + member["avatar_url"] + `"/><div class="status"><h3>` + member["username"] + `</h3><div><div class="green-dot"></div>Online</div></div>`;
+    } else {
+      toAddSection += `<img src="` + member["avatar_url"] + `"/><div class="status"><h3>` + member["username"] + `</h3><div><div class="yellow-dot"></div>Idle</div></div>`;
+    }
+    discordpan.innerHTML += toAddSection + "</section>";
+  })
+  console.log("[Discord] Displayed");
+};
+
+// Settings
+function resetSettings() {
+  let username = localStorage.getItem("username");
+  let server = localStorage.getItem("server");
+  let apikey = localStorage.getItem("apikey");
+  document.getElementById("server-input").value = server;
+  document.getElementById("username-input").value = username;
+  document.getElementById("apikey-input").value = apikey;
+};
+function saveSettings() {
+  let username = document.getElementById("username-input").value;
+  let server = document.getElementById("server-input").value;
+  let apikey = document.getElementById("apikey-input").value;
+  localStorage.setItem("username", username);
+  localStorage.setItem("server", server);
+  localStorage.setItem("apikey", apikey);
+  document.querySelector(".settings-bg").style.display = "none";
+  notify("Settings saved", "info");
+};
+
 // Clock
 const monthArray = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 function updateTime() {
@@ -77,15 +136,22 @@ function notify(text, status) {
 
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
+  // Username
   if (!localStorage.getItem("username")) {
     localStorage.setItem("username", prompt("What's your username?"));
   };
+
+  // Server
   if (!localStorage.getItem("server")) {
     localStorage.setItem("server", prompt("What's your server url?"));
   };
+
+  // Apikey
   if (!localStorage.getItem("apikey")) {
     localStorage.setItem("apikey", prompt("What's your apikey?"));
   };
+
+  // Shortcuts
   localStorageShortcuts = localStorage.getItem("shortcuts");
   if (!localStorageShortcuts || localStorageShortcuts === "undefined") {
     console.log("[Shortcuts] Test result: the shortcuts aren't in the localstorage");
@@ -95,6 +161,34 @@ document.addEventListener("DOMContentLoaded", function () {
     displayStorageShortcuts();
     setTimeout(fetchAndDisplayShortcuts, 5000);
   };
+
+  // Discord
+  localStorageDiscord = localStorage.getItem("discord");
+  if (!localStorageDiscord || localStorageDiscord === "undefined") {
+    console.log("[Discord] Test result: the discord aren't in the localstorage");
+    fetchAndDisplayDiscord();
+  } else {
+    console.log("[Discord] Test result: the discord are already in the localstorage, they will be refetch every 2sec.");
+    displayStorageDiscord();
+  };
+  setInterval(fetchAndDisplayDiscord, 2000);
+  
+  // Clock
   updateTime();
   setInterval(updateTime, 1000);
+
+  // Settings Button
+  document.querySelector('.settings-open-button').addEventListener('click', () => {
+    document.querySelector('.settings-bg').style.display = 'flex';
+    resetSettings();
+  });
+  document.querySelector('.settings-close-button').addEventListener('click', () => {
+    document.querySelector('.settings-bg').style.display = 'none';
+  });
+  document.querySelector('.settings-reset-button').addEventListener('click', () => {
+    resetSettings();
+  });
+  document.querySelector('.settings-save-button').addEventListener('click', () => {
+    saveSettings();
+  });
 });

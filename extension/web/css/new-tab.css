@@ -16,6 +16,7 @@ body {
   background-color: rgba(17, 25, 40, 0.75);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
+  padding: 1.5rem;
 }
 .content {
   display: flex;
@@ -25,40 +26,105 @@ body {
   justify-content: center;
   gap: 5em;
 }
+@media screen and (max-width: 1450px) {
+  .content {
+    flex-direction: column;
+  }
+}
 .left-pan {
   display: flex;
-  flex-direction: column;
   gap: 30px;
+}
+@media screen and (min-width: 1451px) {
+  .left-pan {
+    flex-direction: column;
+  }
+}
+.time-weather {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5em;
+  text-align: center;
 }
 .time {
   display: flex;
-  flex-direction: column;
   font-weight: bold;
-  text-align: center;
-  padding: 2em;
+  flex-direction: column;
 }
 .clock {
   font-size: 3em;
 }
 .date {
   margin-top: 10px;
+  font-size: 1.5em;
+}
+.weather {
+  display: flex;
+  gap: 3em;
+}
+.weather-timestamp{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+.weather-timestamp img {
+  height: 80px;
+  margin: 1.5em;
+}
+.weather-timestamp p {
+  margin: 0;
+}
+.weather-timestamp p.timestamp {
+  font-size: 1.5em;
+  margin-bottom: 7px;
+}
+.weather-timestamp .temp-group {
+  display: flex;
+  gap: 0.5em;
+  align-items: baseline;
+}
+.weather-timestamp p.temp {
+  font-size: 1.7em;
+}
+.weather-timestamp p.subtemp {
+  color: #d8dce2;
+  font-size: 1.3em;
+}
+.weather-timestamp p.comment {
+  font-size: 1.2em;
+}
+.weather-timestamp.first {
+  flex-direction: row;
+}
+.weather-timestamp.first p.temp {
   font-size: 2em;
 }
-.socials-card {
-  padding: 1.5rem;
-  width: 500px;
+.weather-timestamp.first img {
+  height: 120px;
 }
-.card-header {
+.weather-timestamp.first span {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  gap: 1em;
+}
+.discord-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+
+  min-width: 350px;
+}
+.discord-card-header {
   display: flex;
   justify-content: space-between;
   height: 50px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 }
-.card-header img {
+.discord-card-header img {
   width: 150px;
 }
-.card-header a {
+.discord-card-header a {
   display: flex;
   align-items: center;
   gap: 15px;
@@ -66,33 +132,36 @@ body {
   font-weight: bold;
   text-decoration: none;
 }
-.card-body {
+.discord-separate {
+  border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+}
+.discord-card-body {
   display: flex;
   flex-direction: column;
   gap: 1.5em;
 }
-.card-body section {
+.discord-card-body section {
   padding-top: 8px;
   display: flex;
   align-items: center;
   gap: 1.5em;
 }
-.card-body section img {
+.discord-card-body section img {
   height: 50px;
   border-radius: 50%;
 }
-.card-body section .status {
+.discord-card-body section .status {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: 50px;
 }
-.card-body section .status > h3 {
+.discord-card-body section .status > h3 {
   margin: 0 0 6px 0;
   font-weight: 500;
   font-size: 18px;
 }
-.card-body section .status > div {
+.discord-card-body section .status > div {
   display: flex;
   gap: 5px;
   align-items: center;
@@ -103,6 +172,12 @@ body {
   width: 10px;
   border-radius: 50%;
   background-color: rgb(35, 165, 90);
+}
+.yellow-dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+  background-color: rgb(240, 178, 50);
 }
 .right-pan {
   display: flex;
@@ -164,4 +239,87 @@ body {
   100% {
     transform: translateX(115%);
   }
+}
+.settings-open-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 1em;
+  padding: 0.5rem 0.5rem 0.3rem 0.5rem;
+  cursor: pointer;
+}
+.settings-bg {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.settings {
+  display: flex;
+  width: 40vw;
+  flex-direction: column;
+  gap: 2em;
+}
+.settings h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 2em;
+  text-align: center;
+}
+.settings form {
+  display: grid;
+  grid-template: auto / auto 1fr;
+  gap: 1em 1em;
+  font-size: 16px;
+  align-items: center;
+}
+.settings form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+.settings form input[type="text"] {
+  font-size: 16px;
+  color: black;
+  padding: 0.3em;
+}
+.settings-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+.settings-save-button {
+  padding: 0.5rem;
+  cursor: pointer;
+  width: 50%;
+  backdrop-filter: blur(7px) saturate(180%);
+  background-color: rgba(11, 126, 13, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 10px;
+}
+.settings-reset-button {
+  padding: 0.5rem;
+  width: 30%;
+  cursor: pointer;
+  backdrop-filter: blur(7px) saturate(180%);
+  background-color: rgba(152, 39, 33, 0.75);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.125);
+  border-radius: 10px;
+}
+.settings-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 1em;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }

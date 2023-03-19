@@ -15,35 +15,53 @@
   <body>
     <div class="content">
       <div class="left-pan">
-        <div class="time blur-bg">
-          <span class="clock"></span>
-          <span class="date"></span>
-        </div>
-        <div class="socials-card blur-bg">
-          <div class="card-header">
-            <img src="assets/discord-logo.svg" alt="" />
-            <a href="https://discord.com/app"
-              ><span class="material-symbols-outlined"> open_in_full </span
-              >Open</a
-            >
+        <div class="time-weather blur-bg">
+          <div class="time">
+            <span class="clock"></span>
+            <span class="date"></span>
           </div>
-          <div class="card-body">
-            <section>
-              <img
-                src=""
-              />
-              <div class="status">
-                <h3>Someone</h3>
-                <div>
-                  <div class="green-dot"></div>
-                  Online
-                </div>
+          <div class="weather">
+            <div class="weather-timestamp first">
+                <img src="assets/weather/cloudy.svg" />
+                <span>
+                  <div class="temp-group">
+                    <p class="temp">10°</p>
+                    <p class="subtemp">10°</p>
+                  </div>
+                  <p class="comment">Partly Cloudy</p>
+                  <p class="comment">Humidity: 75%</p>
+                </span>
+            </div>
+            <div class="weather-timestamp">
+              <p class="timestamp">Demain</p>
+              <img src="assets/weather/night.svg" />
+              <div class="temp-group">
+                <p class="temp">10°</p>
+                <p class="subtemp">10°</p>
               </div>
-            </section>
+            </div>
+            <div class="weather-timestamp">
+              <p class="timestamp">Mardi</p>
+              <img src="assets/weather/stormy.svg" />
+              <div class="temp-group">
+                <p class="temp">7°</p>
+                <p class="subtemp">7°</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="discord-card blur-bg">
+          <div class="discord-card-header">
+            <img src="assets/discord-logo.svg" alt="" />
+            <a href="https://discord.com/app">
+              <span class="material-symbols-outlined"> open_in_full </span>
+              Open
+            </a>
+          </div>
+          <div class="discord-separate"></div>
+          <div class="discord-card-body">
             <section>
-              <img
-                src=""
-              />
+              <img src="" />
               <div class="status">
                 <h3>Someone</h3>
                 <div>
@@ -59,7 +77,31 @@
         <!-- Shortcuts are inserted here -->
       </div>
     </div>
-    <div class="notification-pan">
+    <div class="notification-pan"></div>
+    <button class="settings-open-button blur-bg">
+      <span class="material-symbols-outlined"> settings </span>
+    </button>
+    <div class="settings-bg">
+      <div class="settings blur-bg">
+        <h1>Settings</h1>
+        <form>
+          <label for="server-input">Server:</label>
+          <input type="text" id="server-input" />
+          <label for="username-input">Username:</label>
+          <input type="text" id="username-input" />
+          <label for="apikey-input">API Key:</label>
+          <input type="text" id="apikey-input" />
+          <label for="city-input">Weather City:</label>
+          <input type="text" id="city-input" />
+        </form>
+        <div class="settings-buttons">
+          <input type="button" value="Reset" class="settings-reset-button" />
+          <input type="button" value="Save" class="settings-save-button" />
+        </div>
+        <button class="settings-close-button">
+          <span class="material-symbols-outlined"> close </span>
+        </button>
+      </div>
     </div>
   </body>
 </html>
