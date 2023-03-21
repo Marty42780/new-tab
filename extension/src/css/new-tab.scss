@@ -1,4 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+@mixin flexbox($direction: row, $gap: 0, $align: unset, $justify: unset) {
+  display: flex;
+  flex-direction: $direction;
+  gap: $gap;
+  align-items: $align;
+  justify-content: $justify;
+}
+
 * {
   font-family: "Roboto", sans-serif;
   color: #ffffff;
@@ -19,12 +28,9 @@ body {
   padding: 1.5rem;
 }
 .content {
-  display: flex;
+  @include flexbox(row, 5em, center, center);
   width: 100%;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
-  gap: 5em;
 }
 @media screen and (max-width: 1450px) {
   .content {
@@ -32,8 +38,7 @@ body {
   }
 }
 .left-pan {
-  display: flex;
-  gap: 30px;
+  @include flexbox($gap: 30px);
 }
 @media screen and (min-width: 1451px) {
   .left-pan {
@@ -41,15 +46,12 @@ body {
   }
 }
 .time-weather {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5em;
+  @include flexbox(column, 2.5em);
   text-align: center;
 }
 .time {
-  display: flex;
+  @include flexbox(column);
   font-weight: bold;
-  flex-direction: column;
 }
 .clock {
   font-size: 3em;
@@ -59,75 +61,61 @@ body {
   font-size: 1.5em;
 }
 .weather {
-  display: flex;
-  gap: 3em;
+  @include flexbox($gap: 3em);
 }
-.weather-timestamp{
-  display: flex;
-  flex-direction: column;
-  align-items: center
-}
-.weather-timestamp img {
-  height: 80px;
-  margin: 1.5em;
-}
-.weather-timestamp p {
-  margin: 0;
-}
-.weather-timestamp p.timestamp {
-  font-size: 1.5em;
-  margin-bottom: 7px;
-}
-.weather-timestamp .temp-group {
-  display: flex;
-  gap: 0.5em;
-  align-items: baseline;
-}
-.weather-timestamp p.temp {
-  font-size: 1.7em;
-}
-.weather-timestamp p.subtemp {
-  color: #d8dce2;
-  font-size: 1.3em;
-}
-.weather-timestamp p.comment {
-  font-size: 1.2em;
-}
-.weather-timestamp.first {
-  flex-direction: row;
-}
-.weather-timestamp.first p.temp {
-  font-size: 2em;
-}
-.weather-timestamp.first img {
-  height: 120px;
-}
-.weather-timestamp.first span {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  justify-content: center;
-  gap: 1em;
+.weather-timestamp {
+  @include flexbox(column, $align: center);
+  img {
+    height: 80px;
+    margin: 1.5em;
+  }
+  p {
+    margin: 0;
+  }
+  p.timestamp {
+    font-size: 1.5em;
+    margin-bottom: 7px;
+  }
+  .temp-group {
+    @include flexbox(row, 0.5em, baseline);
+  }
+  p.temp {
+    font-size: 1.7em;
+  }
+  p.subtemp {
+    color: #d8dce2;
+    font-size: 1.3em;
+  }
+  p.comment {
+    font-size: 1.2em;
+  }
+  &.first {
+    flex-direction: row;
+    p.temp {
+      font-size: 2em;
+    }
+    img {
+      height: 120px;
+    }
+    span {
+      @include flexbox(column, 1em, $justify: center);
+      text-align: left;
+    }
+  }
 }
 .discord-card {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-
+  @include flexbox(column, 1em);
   min-width: 350px;
 }
 .discord-card-header {
-  display: flex;
-  justify-content: space-between;
+  @include flexbox($justify: space-between);
   height: 50px;
 }
 .discord-card-header img {
   width: 150px;
 }
 .discord-card-header a {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+  @include flexbox($gap: 15px, $align: center);
   font-size: large;
   font-weight: bold;
   text-decoration: none;
@@ -136,36 +124,28 @@ body {
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
 }
 .discord-card-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5em;
-}
-.discord-card-body section {
-  padding-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 1.5em;
-}
-.discord-card-body section img {
-  height: 50px;
-  border-radius: 50%;
-}
-.discord-card-body section .status {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  height: 50px;
-}
-.discord-card-body section .status > h3 {
-  margin: 0 0 6px 0;
-  font-weight: 500;
-  font-size: 18px;
-}
-.discord-card-body section .status > div {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  color: #9ca3af;
+  @include flexbox(column, 1.5em);
+  section {
+    @include flexbox($row: 1.5em, $align: center);
+    padding-top: 8px;
+  }
+  section img {
+    height: 50px;
+    border-radius: 50%;
+  }
+  section .status {
+    @include flexbox(column, $justify: flex-end);
+    height: 50px;
+  }
+  section .status > h3 {
+    margin: 0 0 6px 0;
+    font-weight: 500;
+    font-size: 18px;
+  }
+  section .status > div {
+    @include flexbox($gap: 5px, $align: center);
+    color: #9ca3af;
+  }
 }
 .green-dot {
   height: 10px;
@@ -180,39 +160,31 @@ body {
   background-color: rgb(240, 178, 50);
 }
 .right-pan {
-  display: flex;
-  flex-direction: column;
-  gap: 50px;
-}
-.right-pan section {
-  display: flex;
-  gap: 30px;
-}
-.right-pan a {
-  display: flex;
-  align-items: center;
-  gap: 0.5em;
-  padding: 0.3em 1em;
-  font-size: 22px;
-  text-decoration: none;
-}
-.right-pan a:hover {
-  transition: transform 0.2s ease-in-out;
-  transform: scale(108%);
-}
-.right-pan a img {
-  margin-right: 0.5em;
-  height: 40px;
+  @include flexbox(column, 50px);
+  section {
+    @include flexbox($gap: 30px);
+  }
+  a {
+    @include flexbox($row: 0.5em, center);
+    padding: 0.3em 1em;
+    font-size: 22px;
+    text-decoration: none;
+  }
+  a:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(108%);
+  }
+  a img {
+    margin-right: 0.5em;
+    height: 40px;
+  }
 }
 .notification-pan {
+  @include flexbox(column, 1em, flex-end);
   position: absolute;
-  display: flex;
-  align-items: flex-end;
-  flex-direction: column;
   top: 0;
   right: 0;
   margin: 1em;
-  gap: 1em;
 }
 .notification {
   font-size: 22px;
@@ -260,10 +232,8 @@ body {
   background-color: rgba(0, 0, 0, 0.7);
 }
 .settings {
-  display: flex;
+  @include flexbox(column, 2em);
   width: 40vw;
-  flex-direction: column;
-  gap: 2em;
 }
 .settings h1 {
   margin: 0;
@@ -277,21 +247,17 @@ body {
   gap: 1em 1em;
   font-size: 16px;
   align-items: center;
-}
-.settings form label {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5em;
-}
-.settings form input[type="text"] {
-  font-size: 16px;
-  color: black;
-  padding: 0.3em;
+  label {
+    @include flexbox(column, 0.5em);
+  }
+  input[type="text"] {
+    font-size: 16px;
+    color: black;
+    padding: 0.3em;
+  }
 }
 .settings-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 1em;
+  @include flexbox($gap: 1em, $justify: space-between);
 }
 .settings-save-button {
   padding: 0.5rem;

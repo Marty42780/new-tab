@@ -17,6 +17,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/mynoise", (req, res) => {
+  // TODO: Add the user and apikey parameters to the request
   const url = req.query.url;
   console.log(url);
   res.send(
@@ -31,6 +32,7 @@ app.get("/mynoise", (req, res) => {
 });
 
 app.get("/shortcuts", (req, res) => {
+  // TODO: Add the user and apikey parameters to the request
   const userdata = JSON.parse(fs.readFileSync("storage/userdata.json", "utf8"));
   const username = req.query.username;
   const apikey = req.query.apikey;
@@ -46,6 +48,7 @@ app.get("/shortcuts", (req, res) => {
 // TODO: Add requests to edit shortcuts
 
 app.get("/discord", (req, res) => {
+  // TODO: Add the user and apikey parameters to the request
   fetch(discord_api_url)
     .then((response) => response.json())
     .then((data) => res.send(data))
@@ -55,8 +58,8 @@ app.get("/discord", (req, res) => {
 // TODO: Add a request to get the members the user wants to see
 
 app.get("/weather", (req, res) => {
-	// TODO: Add a cache system to avoid too many requests
-	// TODO: Add the user parameters to the request
+  // TODO: Add a cache system to avoid too many requests and minimize the delay
+  // TODO: Add the user and apikey parameters to the request
   let currentWeather;
   let forecastWeather;
 

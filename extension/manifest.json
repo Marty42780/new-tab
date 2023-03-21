@@ -4,7 +4,6 @@
   "description": "Enhanced new-tab",
   "version": "1.0",
   "action": {
-    "default_popup": "web/popup.html",
     "default_icon": "web/assets/icon.png"
   },
   "chrome_url_overrides": {

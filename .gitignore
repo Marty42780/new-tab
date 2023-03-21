@@ -1,4 +1,4 @@
-ideas/
-ideas.md
-backend/node_modules
-backend/storage
+node_modules/
+dist/
+.parcel-cache/
+backend/storage/
