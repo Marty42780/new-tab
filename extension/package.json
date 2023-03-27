@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "New-Tab chrome extension",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node_modules/.bin/parcel src/new-tab.html",
+    "build": "node_modules/.bin/parcel build src/new-tab.html"
   },
-  "author": "",
+  "author": "Marty42780",
   "license": "ISC",
   "dependencies": {
     "parcel": "^2.8.3"

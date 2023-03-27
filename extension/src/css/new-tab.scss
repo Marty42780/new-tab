@@ -7,25 +7,24 @@
   align-items: $align;
   justify-content: $justify;
 }
-
-* {
-  font-family: "Roboto", sans-serif;
-  color: #ffffff;
-}
-body {
-  background-color: rgb(17, 25, 39);
-  background-image: url("../assets/bg-image.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  overflow: hidden;
-}
-.blur-bg {
+@mixin blur-bg() {
   backdrop-filter: blur(7px) saturate(180%);
   background-color: rgba(17, 25, 40, 0.75);
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.125);
   padding: 1.5rem;
+}
+* {
+  font-family: "Roboto", sans-serif;
+  color: #ffffff;
+}
+body {
+  background: rgb(17, 25, 39) url("../assets/bg-image.jpg") center / cover
+    no-repeat;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll; /* pour le défilement vertical */
 }
 .content {
   @include flexbox(row, 5em, center, center);
@@ -47,6 +46,7 @@ body {
 }
 .time-weather {
   @include flexbox(column, 2.5em);
+  @include blur-bg();
   text-align: center;
 }
 .time {
@@ -105,6 +105,7 @@ body {
 }
 .discord-card {
   @include flexbox(column, 1em);
+  @include blur-bg();
   min-width: 350px;
 }
 .discord-card-header {
@@ -126,38 +127,38 @@ body {
 .discord-card-body {
   @include flexbox(column, 1.5em);
   section {
-    @include flexbox($row: 1.5em, $align: center);
+    @include flexbox($gap: 1.5em, $align: center);
     padding-top: 8px;
+    img {
+      height: 50px;
+      border-radius: 50%;
+    }
+    .status {
+      @include flexbox(column, $justify: flex-end);
+      height: 50px;
+      h3 {
+        margin: 0 0 6px 0;
+        font-weight: 500;
+        font-size: 18px;
+      }
+      div {
+        @include flexbox($gap: 5px, $align: center);
+        color: #9ca3af;
+      }
+      .green-dot,
+      .yellow-dot {
+        height: 8px;
+        width: 8px;
+        border-radius: 50%;
+      }
+      .green-dot {
+        background-color: rgb(35, 165, 90);
+      }
+      .yellow-dot {
+        background-color: rgb(240, 178, 50);
+      }
+    }
   }
-  section img {
-    height: 50px;
-    border-radius: 50%;
-  }
-  section .status {
-    @include flexbox(column, $justify: flex-end);
-    height: 50px;
-  }
-  section .status > h3 {
-    margin: 0 0 6px 0;
-    font-weight: 500;
-    font-size: 18px;
-  }
-  section .status > div {
-    @include flexbox($gap: 5px, $align: center);
-    color: #9ca3af;
-  }
-}
-.green-dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: rgb(35, 165, 90);
-}
-.yellow-dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-  background-color: rgb(240, 178, 50);
 }
 .right-pan {
   @include flexbox(column, 50px);
@@ -165,7 +166,8 @@ body {
     @include flexbox($gap: 30px);
   }
   a {
-    @include flexbox($row: 0.5em, center);
+    @include flexbox($gap: 0.5em, $align: center);
+    @include blur-bg();
     padding: 0.3em 1em;
     font-size: 22px;
     text-decoration: none;
@@ -213,6 +215,7 @@ body {
   }
 }
 .settings-open-button {
+  @include blur-bg();
   position: absolute;
   bottom: 0;
   right: 0;
@@ -233,6 +236,7 @@ body {
 }
 .settings {
   @include flexbox(column, 2em);
+  @include blur-bg();
   width: 40vw;
 }
 .settings h1 {
