@@ -144,22 +144,37 @@ body {
       div {
         @include flexbox($gap: 5px, $align: center);
         color: #9ca3af;
+        &.game {
+          animation: clignote 1.2s infinite;
+        }
       }
-      .green-dot,
-      .yellow-dot {
-        height: 8px;
-        width: 8px;
-        border-radius: 50%;
+      @keyframes clignote {
+        0% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
       }
-      .green-dot {
-        background-color: rgb(35, 165, 90);
-      }
-      .yellow-dot {
-        background-color: rgb(240, 178, 50);
-      }
+    }
+    .green-dot,
+    .yellow-dot {
+      height: 8px;
+      width: 8px;
+      border-radius: 50%;
+    }
+    .green-dot {
+      background-color: rgb(35, 165, 90);
+    }
+    .yellow-dot {
+      background-color: rgb(240, 178, 50);
     }
   }
 }
+
 .right-pan {
   @include flexbox(column, 50px);
   section {

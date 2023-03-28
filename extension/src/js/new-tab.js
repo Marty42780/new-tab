@@ -46,7 +46,7 @@ function displayStorageShortcuts() {
         shortcut.image +
         `"/><p>` +
         shortcut.name +
-        `</p></a>`;
+         `</p>` + (shortcut.target === "window" ? " <span class=\'material-symbols-outlined\'> new_window </span>" : "") + `</a>`;
     });
     $(".right-pan").append(toAddSection + "</section>");
   });
@@ -66,7 +66,6 @@ function fetchAndDisplayDiscord() {
       if (localStorage.getItem("discord") !== JSON.stringify(data)) {
         localStorage.setItem("discord", JSON.stringify(data));
         displayStorageDiscord();
-        notify("Discord synchronized with the server", "info");
       } else {
         console.log("[Discord] Fetched with the server but nothing changed");
       }
@@ -86,7 +85,9 @@ function displayStorageDiscord() {
       member["avatar"] +
       `"/><div class="status"><h3>` +
       member["username"] +
-      `</h3><div><div class="` +
+      `</h3><div class="` +
+      (member["game"] !== null ? "game" : "") +
+      `"><div class="` +
       (member["status"] === "online" ? "green-dot" : "yellow-dot") +
       `"></div>` +
       (member["game"] !== null
