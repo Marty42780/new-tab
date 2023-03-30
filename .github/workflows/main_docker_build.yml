@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: Docker Build and Push
     steps:
-      - name: Change directory to backend/
-        run: cd backend/
       - name: Checkout
         uses: actions/checkout@v2
       - name: Set up Docker Buildx
@@ -24,7 +22,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: backend/
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/new-tab:latest
