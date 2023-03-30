@@ -25,4 +25,4 @@ jobs:
           context: .
           file: backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/new-tab:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/new-tab:dev
