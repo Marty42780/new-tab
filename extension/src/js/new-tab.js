@@ -162,17 +162,17 @@ function notify(text, status) {
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
   // Username
-  if (!localStorage.getItem("username")) {
+  if (!localStorage.getItem("username" || localStorage.getItem("username") === null || localStorage.getItem("username") === "undefined")) {
     localStorage.setItem("username", prompt("What's your username?"));
   }
 
   // Server
-  if (!localStorage.getItem("server")) {
+  if (!localStorage.getItem("server" || localStorage.getItem("server") === null || localStorage.getItem("server") === "undefined")) {
     localStorage.setItem("server", prompt("What's your server url?"));
   }
 
   // Apikey
-  if (!localStorage.getItem("apikey")) {
+  if (!localStorage.getItem("apikey") || localStorage.getItem("apikey") === null || localStorage.getItem("apikey") === "undefined") {
     localStorage.setItem("apikey", prompt("What's your apikey?"));
   }
 
