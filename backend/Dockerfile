@@ -1,11 +1,11 @@
 FROM node:slim
 
 # copy project
-COPY . /usr/src/app/
+COPY backend/ /usr/src/app/
 
 # set work directory
 WORKDIR /usr/src/app/
-RUN chmod +x ./init.sh
+RUN chmod +x /usr/src/app/init.sh
 
 # install dependencies
 RUN npm install
