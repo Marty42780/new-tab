@@ -1,10 +1,11 @@
 {
   "name": "new-tab-backend",
-  "version": "1.0.0",
+  "version": "1.0",
   "description": "Backend to use new-tab extension",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Marty42780",
   "license": "ISC",
