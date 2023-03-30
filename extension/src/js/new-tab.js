@@ -1,6 +1,6 @@
 // TODO: Fetch the background image from the server.
 // TODO: Add a way to change the background image and the shortcuts on the ui.
-// TODO: Switch to jQuery.
+// TODO: Fetched the weather from the server.
 // TODO: Create a scroll view without the scrollbar to add news and calendar section.
 
 // Shortcuts
@@ -162,23 +162,23 @@ function notify(text, status) {
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
   // Username
-  if (!localStorage.getItem("username" || localStorage.getItem("username") === null || localStorage.getItem("username") === "undefined")) {
+  if (!localStorage.getItem("username" || localStorage.getItem("username") === "null" || localStorage.getItem("username") === "undefined")) {
     localStorage.setItem("username", prompt("What's your username?"));
   }
 
   // Server
-  if (!localStorage.getItem("server" || localStorage.getItem("server") === null || localStorage.getItem("server") === "undefined")) {
+  if (!localStorage.getItem("server") || localStorage.getItem("server") === "null" || localStorage.getItem("server") === "undefined") {
     localStorage.setItem("server", prompt("What's your server url?"));
   }
 
   // Apikey
-  if (!localStorage.getItem("apikey") || localStorage.getItem("apikey") === null || localStorage.getItem("apikey") === "undefined") {
+  if (!localStorage.getItem("apikey") || localStorage.getItem("apikey") === "null" || localStorage.getItem("apikey") === "undefined") {
     localStorage.setItem("apikey", prompt("What's your apikey?"));
   }
 
   // Shortcuts
   localStorageShortcuts = localStorage.getItem("shortcuts");
-  if (!localStorageShortcuts || localStorageShortcuts === "undefined") {
+  if (!localStorageShortcuts && localStorageShortcuts !== "undefined") {
     console.log(
       "[Shortcuts] Test result: the shortcuts aren't in the localstorage"
     );
