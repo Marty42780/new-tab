@@ -1,4 +1,4 @@
-// TODO: Fetch the background image from the server.
+// TODO: Fetch the background image from the server to let user choose the image.
 // TODO: Add a way to change the background image and the shortcuts on the ui.
 // TODO: Fetched the weather from the server.
 // TODO: Create a scroll view without the scrollbar to add news and calendar section.
@@ -42,11 +42,15 @@ function displayStorageShortcuts() {
           : shortcut.target === "_blank"
           ? shortcut.link + `" target="_blank"`
           : shortcut.link) +
-        `"><img src="` +
+        `">` +
         shortcut.image +
-        `"/><p>` +
+        `<p>` +
         shortcut.name +
-         `</p>` + (shortcut.target === "window" ? " <span class=\'material-symbols-outlined\'> new_window </span>" : "") + `</a>`;
+        `</p>` +
+        (shortcut.target === "window"
+          ? " <span class='material-symbols-outlined'> new_window </span>"
+          : "") +
+        `</a>`;
     });
     $(".right-pan").append(toAddSection + "</section>");
   });
@@ -162,17 +166,31 @@ function notify(text, status) {
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
   // Username
-  if (!localStorage.getItem("username" || localStorage.getItem("username") === "null" || localStorage.getItem("username") === "undefined")) {
+  if (
+    !localStorage.getItem(
+      "username" ||
+        localStorage.getItem("username") === "null" ||
+        localStorage.getItem("username") === "undefined"
+    )
+  ) {
     localStorage.setItem("username", prompt("What's your username?"));
   }
 
   // Server
-  if (!localStorage.getItem("server") || localStorage.getItem("server") === "null" || localStorage.getItem("server") === "undefined") {
+  if (
+    !localStorage.getItem("server") ||
+    localStorage.getItem("server") === "null" ||
+    localStorage.getItem("server") === "undefined"
+  ) {
     localStorage.setItem("server", prompt("What's your server url?"));
   }
 
   // Apikey
-  if (!localStorage.getItem("apikey") || localStorage.getItem("apikey") === "null" || localStorage.getItem("apikey") === "undefined") {
+  if (
+    !localStorage.getItem("apikey") ||
+    localStorage.getItem("apikey") === "null" ||
+    localStorage.getItem("apikey") === "undefined"
+  ) {
     localStorage.setItem("apikey", prompt("What's your apikey?"));
   }
 
