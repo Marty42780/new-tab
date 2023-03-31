@@ -1,7 +1,8 @@
 # New-Tab
 
-<!-- TODO: Add Github badges. -->
-<!-- TODO: Add Github workflows to automate deployment. -->
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Marty42780/new-tab/main_docker_build.yml?label=backend%20build&logo=github)
+
+<!-- TODO: Add more Github badges. -->
 
 ## Extension
 
@@ -13,10 +14,6 @@
 - Clock, date and weather _(weather fetched on backend)_.
 - Discord friend activity _(fetched on backend)_.
 - Shortcuts _(fetched on backend)_.
-<!--
-- TODO: Status bar with usefull informations (maybe speedtest or next evenments on Calendar).
-- TODO: Widgets / Shortcut to News (maybe on the scrolled view).
-  -->
 
 ## Back-End
 
