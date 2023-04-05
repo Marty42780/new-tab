@@ -18,9 +18,35 @@
   font-family: "Roboto", sans-serif;
   color: #ffffff;
 }
+.bgDiv,
+.bgFilter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.bgDiv {
+  background: url("../assets/bg-image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 700ms;
+  &.shown {
+    opacity: 1;
+  }
+}
+.bgFilter {
+  background: radial-gradient(transparent 50%, black),
+    linear-gradient(transparent, black);
+  display: inherit;
+  opacity: 0.2;
+}
+
 body {
-  background: rgb(17, 25, 39) url("../assets/bg-image.jpg") center / cover
-    no-repeat;
+  background: rgb(53, 53, 53);
   &::-webkit-scrollbar {
     display: none;
   }
@@ -71,23 +97,23 @@ body {
   }
   p {
     margin: 0;
-  }
-  p.timestamp {
-    font-size: 1.5em;
-    margin-bottom: 7px;
-  }
-  .temp-group {
-    @include flexbox(row, 0.5em, baseline);
-  }
-  p.temp {
-    font-size: 1.7em;
-  }
-  p.subtemp {
-    color: #d8dce2;
-    font-size: 1.3em;
-  }
-  p.comment {
-    font-size: 1.2em;
+    &.timestamp {
+      font-size: 1.5em;
+      margin-bottom: 7px;
+    }
+    &.temp-group {
+      @include flexbox(row, 0.5em, baseline);
+    }
+    &.temp {
+      font-size: 1.7em;
+    }
+    &.subtemp {
+      color: #d8dce2;
+      font-size: 1.3em;
+    }
+    &.comment {
+      font-size: 1.2em;
+    }
   }
   &.first {
     flex-direction: row;
@@ -111,15 +137,15 @@ body {
 .discord-card-header {
   @include flexbox($justify: space-between);
   height: 50px;
-}
-.discord-card-header img {
-  width: 150px;
-}
-.discord-card-header a {
-  @include flexbox($gap: 15px, $align: center);
-  font-size: large;
-  font-weight: bold;
-  text-decoration: none;
+  img {
+    width: 150px;
+  }
+  a {
+    @include flexbox($gap: 15px, $align: center);
+    font-size: large;
+    font-weight: bold;
+    text-decoration: none;
+  }
 }
 .discord-separate {
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
@@ -186,14 +212,14 @@ body {
     padding: 0.3em 1em;
     font-size: 22px;
     text-decoration: none;
-  }
-  a:hover {
-    transition: transform 0.2s ease-in-out;
-    transform: scale(108%);
-  }
-  a img {
-    margin-right: 0.5em;
-    height: 40px;
+    &:hover {
+      transition: transform 0.2s ease-in-out;
+      transform: scale(108%);
+    }
+    img {
+      margin-right: 0.5em;
+      height: 40px;
+    }
   }
 }
 .notification-pan {
@@ -253,26 +279,26 @@ body {
   @include flexbox(column, 2em);
   @include blur-bg();
   width: 40vw;
-}
-.settings h1 {
-  margin: 0;
-  padding: 0;
-  font-size: 2em;
-  text-align: center;
-}
-.settings form {
-  display: grid;
-  grid-template: auto / auto 1fr;
-  gap: 1em 1em;
-  font-size: 16px;
-  align-items: center;
-  label {
-    @include flexbox(column, 0.5em);
+  h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    text-align: center;
   }
-  input[type="text"] {
+  form {
+    display: grid;
+    grid-template: auto / auto 1fr;
+    gap: 1em 1em;
     font-size: 16px;
-    color: black;
-    padding: 0.3em;
+    align-items: center;
+    label {
+      @include flexbox(column, 0.5em);
+    }
+    input[type="text"] {
+      font-size: 16px;
+      color: black;
+      padding: 0.3em;
+    }
   }
 }
 .settings-buttons {
@@ -307,4 +333,12 @@ body {
   cursor: pointer;
   background-color: transparent;
   border: none;
+}
+.newsDiv {
+  height: 100vh;
+  width: 100%;
+  iframe {
+    height: 25%;
+    width: 25%;
+  }
 }

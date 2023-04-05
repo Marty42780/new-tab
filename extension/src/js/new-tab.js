@@ -30,7 +30,7 @@ function fetchAndDisplayShortcuts() {
   });
 }
 function displayStorageShortcuts() {
-  // $(".right-pan").empty();
+  $(".right-pan").empty();
   JSON.parse(localStorage.getItem("shortcuts")).forEach((section) => {
     toAddSection = "<section>";
     section.forEach((shortcut) => {
@@ -139,7 +139,7 @@ function updateTime() {
   let hours = currentTime.getHours();
   let minutes = currentTime.getMinutes();
   let seconds = currentTime.getSeconds();
-  hours = hours === 0 ? "00" : hours;
+  hours = hours < 10 ? "0" + hours : hours;
   minutes = minutes < 10 ? "0" + minutes : minutes;
   seconds = seconds < 10 ? "0" + seconds : seconds;
   $(".clock").text(`${hours}:${minutes}:${seconds}`);
@@ -162,9 +162,15 @@ function notify(text, status) {
     notificationElement.remove();
   });
 }
-
+function imageLoad() {
+  $(".bgDiv").addClass("shown");
+}
+function loadNewsDiv() {
+  
+}
 // On page load
 document.addEventListener("DOMContentLoaded", function () {
+  $(".bgImage").on("load", imageLoad());
   // Username
   if (
     !localStorage.getItem(
@@ -242,7 +248,20 @@ document.addEventListener("DOMContentLoaded", function () {
   $(".settings-save-button").click(function () {
     saveSettings();
   });
-});
-window.addEventListener("scroll", function () {
-  console.log(window.scrollY);
+
+  // If the user scroll the webpage, i want the site be scrolled all the page by 100%
+  document.addEventListener("wheel", function (e) {
+    if (e.deltaY > 0) {
+      $("html, body").animate(
+        { scrollTop: $(window).scrollTop() + $(window).height() },
+        500
+      );
+      loadNewsDiv();
+    } else {
+      $("html, body").animate(
+        { scrollTop: $(window).scrollTop() - $(window).height() },
+        500
+      );
+    }
+  });
 });
